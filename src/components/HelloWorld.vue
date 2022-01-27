@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+
+const cloudInstance = 'https://cloud-test.hdw.mx'
+const localHost = 'http://localhost:3000'
+const dashboardPath = `${cloudInstance}/dashboard?devServer=http://localhost:3000/widget`
+const authorizePath = `${cloudInstance}/authorize?redirectUrl=${dashboardPath}`
+
 defineProps<{ msg: string }>()
 const state$ = (window as any).shared$
 console.log(state$);
@@ -10,34 +16,20 @@ const count = ref(0)
 
 <template>
   <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
-  <p>
-    <a href="https://vitejs.dev/guide/features.html" target="_blank">
-      Vite Docs
-    </a>
-    |
-    <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
-  </p>
+  <div>
+    <a :href="dashboardPath" target="_widget_preview">Open Live Preview</a>
+  </div>
 
   <button type="button" @click="count++">count is: {{ count }}</button>
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
 </template>
 
 <style scoped>
 a {
   color: #42b983;
+}
+
+div {
+  margin: 64px 0;
 }
 
 label {
