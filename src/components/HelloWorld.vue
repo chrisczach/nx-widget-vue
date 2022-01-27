@@ -8,19 +8,22 @@ const dashboardPath = `${cloudInstance}/dashboard?devServer=http://localhost:300
 const authorizePath = `${cloudInstance}/authorize?redirectUrl=${dashboardPath}`
 
 defineProps<{ msg: string }>()
-const state$ = (window as any).shared$
-console.log(state$);
+
+const isIframe = window.location !== window.parent.location
 const count = ref(0)
 
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
-  <div>
+  <div v-if="isIframe">
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <h1>{{ msg }}</h1>
+    <button type="button" @click="count++">count is: {{ count }}</button>
+  </div>
+  <div v-else>
+    <h1>Widget running</h1>
     <a :href="dashboardPath" target="_widget_preview">Open Live Preview</a>
   </div>
-
-  <button type="button" @click="count++">count is: {{ count }}</button>
 </template>
 
 <style scoped>
