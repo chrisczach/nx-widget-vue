@@ -13,6 +13,7 @@ export default defineConfig({
     brotliSize: false,
     rollupOptions: {
       inlineDynamicImports: true,
+      input: ['widget.html', 'edit.html', 'index.html'],
       output: {
         manualChunks: () => "not_used.js",
       },
