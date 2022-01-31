@@ -19,5 +19,14 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    proxy: {
+      '^^((?!widget\.html|edit\.html|@vite\/client|src|node_modules|@id).)*$': {
+        target: 'https://localhost:9000',
+        secure: false,
+        changeOrigin: true,
+      }
+    }
+  }
 })
 
