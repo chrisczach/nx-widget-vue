@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 
 
 const cloudInstance = 'https://localhost:9000'
@@ -11,8 +11,27 @@ defineProps<{ msg: string }>()
 
 const isShownAsWidget = window.location !== window.parent.location
 const count = ref(0)
+const sharedState = ref()
+const updateSharedState = () => {
+  sharedState.value.next(sharedState.value.value + 1)
+}
+
 // @ts-ignore
 const isEditMode = editMode
+
+onBeforeMount(() => new Promise<void>((resolve) => {
+  const stateChecker = setInterval(() => {
+    const stateObject = (window as any).sharedState
+    if (stateObject) {
+      sharedState.value = stateObject;
+      clearInterval(stateChecker)
+      stateObject.subscribe((val: number) => {
+        count.value = val
+      })
+      resolve()
+    }
+  }, 10)
+}))
 
 </script>
 
@@ -21,7 +40,7 @@ const isEditMode = editMode
     <h1>{{ msg }}</h1>
     <h2 v-if="isEditMode">Edit Mode</h2>
     <h2 v-else>Widget Mode</h2>
-    <button type="button" @click="count++">count is: {{ count }}</button>
+    <button type="button" @click="updateSharedState()">Shared state from cloud portal: {{ count }}</button>
   </div>
   <div v-else>
     <h1 v-if="isEditMode">Edit Mode running</h1>
