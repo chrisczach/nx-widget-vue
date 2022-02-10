@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
+import { SharedWidgetState } from 'nx-dashboard-state'
 
 
 const cloudInstance = 'https://localhost:9000'
@@ -11,21 +12,18 @@ defineProps<{ msg: string }>()
 
 const isShownAsWidget = window.location !== window.parent.location
 const count = ref(0)
-const sharedState = ref()
-const updateSharedState = () => {
-  sharedState.value.next(sharedState.value.value + 1)
-}
+const sharedState = ref<SharedWidgetState>()
 
 // @ts-ignore
 const isEditMode = editMode
 
 onBeforeMount(() => new Promise<void>((resolve) => {
   const stateChecker = setInterval(() => {
-    const stateObject = (window as any).sharedState
+    const stateObject = (window as any).sharedState as SharedWidgetState
     if (stateObject) {
       sharedState.value = stateObject;
       clearInterval(stateChecker)
-      stateObject.subscribe((val: number) => {
+      stateObject.state$.subscribe((val: number) => {
         count.value = val
       })
       resolve()
@@ -40,7 +38,9 @@ onBeforeMount(() => new Promise<void>((resolve) => {
     <h1>{{ msg }}</h1>
     <h2 v-if="isEditMode">Edit Mode</h2>
     <h2 v-else>Widget Mode</h2>
-    <button type="button" @click="updateSharedState()">Shared state from cloud portal: {{ count }}</button>
+    <button type="button" @click="sharedState?.increment()">Increment</button>
+    <button type="button" @click="sharedState?.decrement()">Decrement</button>
+    <div>Shared state from cloud portal: {{ count }}</div>
   </div>
   <div v-else>
     <h1 v-if="isEditMode">Edit Mode running</h1>
