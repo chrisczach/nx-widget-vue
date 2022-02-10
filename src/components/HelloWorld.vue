@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
 import { SharedWidgetState } from 'dashboard-widget-state'
+import { cloudInstance, devServer } from '../config'
 
-
-const cloudInstance = 'https://localhost:9000'
-const localHost = 'http://localhost:3000'
-const dashboardPath = `${cloudInstance}/dashboard?devServer=http://localhost:3000`
-const authorizePath = `${cloudInstance}/authorize?redirectUrl=${dashboardPath}`
+const dashboardPath = `${cloudInstance}/dashboard?devServer=${devServer}`
 
 defineProps<{ msg: string }>()
 

@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { viteSingleFile } from "vite-plugin-singlefile"
-
-const localHost = 'http://localhost:3000'
+import { cloudInstance, devServer } from './src/config'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,13 +23,13 @@ export default defineConfig({
   server: {
     proxy: {
       '^^((?!widget\.html|edit\.html|@vite\/client|src|node_modules|@id).)*$': {
-        target: 'https://localhost:9000',
+        target: cloudInstance,
         secure: false,
         changeOrigin: true,
         configure: (proxy, options) => {
           proxy.on('proxyReq', (proxyReq, req, res, options) => {
             if (proxyReq.path == '/') {
-              res.setHeader('Set-Cookie', `devServer=${localHost}`)
+              res.setHeader('Set-Cookie', `devServer=${devServer}`)
             }
           })
         }
