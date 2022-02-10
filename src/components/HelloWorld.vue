@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
-import { SharedWidgetState } from 'nx-dashboard-state'
+import { SharedWidgetState } from 'dashboard-widget-state'
 
 
 const cloudInstance = 'https://localhost:9000'
