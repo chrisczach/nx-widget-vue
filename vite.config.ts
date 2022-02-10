@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { viteSingleFile } from "vite-plugin-singlefile"
 
+const localHost = 'http://localhost:3000'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), viteSingleFile()],
@@ -25,6 +27,13 @@ export default defineConfig({
         target: 'https://localhost:9000',
         secure: false,
         changeOrigin: true,
+        configure: (proxy, options) => {
+          proxy.on('proxyReq', (proxyReq, req, res, options) => {
+            if (proxyReq.path == '/') {
+              res.setHeader('Set-Cookie', `devServer=${localHost}`)
+            }
+          })
+        }
       }
     }
   }
