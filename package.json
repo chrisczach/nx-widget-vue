@@ -7,7 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "dashboard-widget-state": "^0.2.3",
+    "dashboard-widget-state": "^0.2.4",
     "vue": "^3.2.25"
   },
   "devDependencies": {
