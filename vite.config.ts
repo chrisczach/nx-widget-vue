@@ -21,6 +21,8 @@ export default defineConfig({
     },
   },
   server: {
+    host: '127.0.0.1',
+    open: true,
     proxy: {
       '^^((?!widget\.html|edit\.html|@vite\/client|src|node_modules|@id).)*$': {
         target: cloudInstance,
