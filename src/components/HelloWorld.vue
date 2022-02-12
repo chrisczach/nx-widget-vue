@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue";
 import { SharedWidgetState, System } from "dashboard-widget-state";
-import { cloudInstance, devServer } from "../config";
+import { devServer } from "../config";
 
-const dashboardPath = `${cloudInstance}/dashboard?devServer=${devServer}`;
+const dashboardPath = `${CLOUD_INSTANCE}/dashboard?devServer=${devServer}`;
 
 defineProps<{ msg: string }>();
 
