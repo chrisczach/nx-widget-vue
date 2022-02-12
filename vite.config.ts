@@ -30,7 +30,7 @@ export default defineConfig(async ({ mode }) => {
 
   return {
     define: {
-      CLOUD_INSTANCE
+      CLOUD_INSTANCE: CLOUD_INSTANCE as string
     },
     plugins: [vue(), viteSingleFile()],
     build: {
