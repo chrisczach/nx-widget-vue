@@ -3,7 +3,7 @@ import { onBeforeMount, ref } from "vue";
 import { SharedWidgetState, System } from "dashboard-widget-state";
 import { devServer } from "../config";
 
-const dashboardPath = `${import.meta.env.CLOUD_INSTANCE}/dashboard?devServer=${devServer}`;
+const dashboardPath = `${process.env.CLOUD_INSTANCE}/dashboard?devServer=${devServer}`;
 
 defineProps<{ msg: string }>();
 
