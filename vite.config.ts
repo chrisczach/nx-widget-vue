@@ -56,7 +56,7 @@ export default defineConfig(async ({ mode }) => {
           configure: (proxy, options) => {
             proxy.on('proxyReq', (proxyReq, req, res, options) => {
               const cookies = req.headers.Cookie
-              if (cookies?.[(typeof cookies === 'string' ? 'search' : 'find')](`devServer=${devServer}`)) {
+              if (!cookies?.[(typeof cookies === 'string' ? 'search' : 'find')](`devServer=${devServer}`)) {
                 res.setHeader('Set-Cookie', `devServer=${devServer}`)
               }
             })
