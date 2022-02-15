@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --",
-    "build": "vue-tsc --noEmit && vite build && npx package-nx-widget",
+    "build": "vue-tsc --noEmit && vite build && npm run package-widget",
+    "package-widget": "npx package-nx-widget",
     "preview": "vite preview"
   },
   "dependencies": {
