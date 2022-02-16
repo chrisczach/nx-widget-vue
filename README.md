@@ -9,4 +9,4 @@ npm run https://point.to.instance
 ## To bundle package
 npm run build
 
-Packaged widget will be in dist/widget-config.json
+Packaged widget will be in dist/name-from-widget-config.json
