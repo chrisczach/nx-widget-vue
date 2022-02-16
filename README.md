@@ -1,10 +1,12 @@
-# Running Dev Server
+# Overview
+This is the template generated when selecting the Vue option when running the create-nx-widget command. https://github.com/chrisczach/create-nx-widget
 
-## To run pointing to frontend running locally
+# Running Dev Server
 npm run dev
 
-## To run pointing to specific instance
-npm run https://point.to.instance
+## When starting dev server you'll be prompted to select instance
+Please enter cloud portal instance for previews:
+https://point.to.instance
 
 ## To bundle package
 npm run build
